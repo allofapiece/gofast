@@ -1,0 +1,27 @@
+# IntelliJ IDEA project files
+.idea
+*.iml
+target
+out
+
+# log files and other runtime content
+*\.log
+runtime
+
+# node vendor dir
+node_modules
+
+# cache
+.gulp-scss-cache
+v8-compile-cache-0
+
+# local properties
+/**/*-local.properties
+/**/*-local.conf
+
+# compiled assets
+src/main/resources/static/assets
+dist
+
+# environmet
+.env
