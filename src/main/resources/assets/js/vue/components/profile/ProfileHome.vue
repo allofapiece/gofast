@@ -5,6 +5,22 @@
                 <v-navigation-drawer permanent class="elevation-4" style="width:100%" floating>
                     <template v-if="this.isCurrent">
                         <v-list dense nav>
+                            <v-list-item link :to="`/${this.profile.slug}/general`">
+                                <v-list-item-icon>
+                                    <v-icon>face</v-icon>
+                                </v-list-item-icon>
+                                <v-list-item-content>
+                                    <v-list-item-title>Profile</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item link to="/points">
+                                <v-list-item-icon>
+                                    <v-icon>rounded_corner</v-icon>
+                                </v-list-item-icon>
+                                <v-list-item-content>
+                                    <v-list-item-title>Points</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
                             <v-list-item link to="/user/settings/general">
                                 <v-list-item-icon>
                                     <v-icon>settings_input_component</v-icon>
@@ -18,7 +34,7 @@
                                     <v-icon>create</v-icon>
                                 </v-list-item-icon>
                                 <v-list-item-content>
-                                    <v-list-item-title>Edit profile</v-list-item-title>
+                                    <v-list-item-title>Edit Profile</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
                         </v-list>
@@ -26,24 +42,14 @@
                 </v-navigation-drawer>
             </v-col>
             <v-col class="col-12 col-md-9">
-                <div class="spot">
-                    <div class="spot-content">
-                        <div class="d-flex mb-2">
-                            <h3 class="display-1">{{ this.fullName }}</h3>
-                        </div>
-                        <blockquote v-if="this.profile.about">{{ this.profile.about }}</blockquote>
-                        <hr class="mb-2"/>
-                    </div>
-                </div>
+                <router-view :profile="this.profile"></router-view>
             </v-col>
         </v-row>
     </v-container>
 </template>
 
 <script>
-    import profileUtil from 'util/profile'
     import userService from 'service/UserService'
-    import empty from 'is-empty'
 
     export default {
         data() {
@@ -57,9 +63,6 @@
             },
         },
         computed: {
-            fullName() {
-               return !empty(this.profile) ? profileUtil.fullName(this.profile) : 'User Name'
-            },
             isCurrent() {
                 return this.profile.id === this.$store.state.profile.profile.id
             }

@@ -7,36 +7,55 @@
                     v-model="invalid"
                     @submit.prevent="submit"
             >
-                <ValidationProvider
-                        name="firstName"
-                        ref="firstName"
-                        rules="required"
-                >
-                    <v-text-field
-                            v-model="firstName"
-                            prepend-icon="person"
-                            slot-scope="{ errors }"
-                            :error-messages="errors"
-                            label="First Name"
-                            required
-                            type="email"
-                    ></v-text-field>
-                </ValidationProvider>
-                <ValidationProvider
-                        name="lastName"
-                        ref="lastName"
-                        rules="required"
-                >
-                    <v-text-field
-                            v-model="lastName"
-                            prepend-icon="person"
-                            slot-scope="{ errors }"
-                            :error-messages="errors"
-                            label="Last Name"
-                            required
-                            type="email"
-                    ></v-text-field>
-                </ValidationProvider>
+                <template v-if="isCompany">
+                    <ValidationProvider
+                            name="companyName"
+                            ref="companyName"
+                            rules="required"
+                    >
+                        <v-text-field
+                                v-model="name"
+                                prepend-icon="person"
+                                slot-scope="{ errors }"
+                                :error-messages="errors"
+                                label="Company Name"
+                                required
+                                type="text"
+                        ></v-text-field>
+                    </ValidationProvider>
+                </template>
+                <template v-else>
+                    <ValidationProvider
+                            name="firstName"
+                            ref="firstName"
+                            rules="required"
+                    >
+                        <v-text-field
+                                v-model="firstName"
+                                prepend-icon="person"
+                                slot-scope="{ errors }"
+                                :error-messages="errors"
+                                label="First Name"
+                                required
+                                type="text"
+                        ></v-text-field>
+                    </ValidationProvider>
+                    <ValidationProvider
+                            name="lastName"
+                            ref="lastName"
+                            rules="required"
+                    >
+                        <v-text-field
+                                v-model="lastName"
+                                prepend-icon="person"
+                                slot-scope="{ errors }"
+                                :error-messages="errors"
+                                label="Last Name"
+                                required
+                                type="text"
+                        ></v-text-field>
+                    </ValidationProvider>
+                </template>
                 <ValidationProvider
                         name="email"
                         ref="email"
@@ -109,6 +128,7 @@
                 invalid: true,
                 firstName: '',
                 lastName: '',
+                name: '',
                 email: '',
                 password: '',
                 confirmedPassword: '',

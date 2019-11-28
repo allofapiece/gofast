@@ -14,6 +14,10 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @JsonView(Views.WithMeta.class)
 public class ExtendedResponse<T> extends Response<T> {
+    public ExtendedResponse(T _embedded) {
+        super(_embedded);
+    }
+
     @Builder
     public ExtendedResponse(T _embedded, List<Alert> alerts) {
         super(_embedded);

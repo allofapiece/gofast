@@ -38,6 +38,8 @@ export class AuthService {
         store.commit('auth/authenticated', false)
         store.commit('profile/profile', false, {root: true})
 
+        store.commit('point/reset')
+
         router.push('/signin')
     }
 

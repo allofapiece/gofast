@@ -7,7 +7,7 @@
                     <div class="flex-grow-1"></div>
 
                     <template v-if="this.profile">
-                        <v-btn :to="'/' + this.profile.slug" icon class="ml-2">
+                        <v-btn :to="`/${this.profile.slug}/general`" icon class="ml-2">
                             <v-icon>mdi-account-circle</v-icon>
                         </v-btn>
                         <v-btn text v-if="this.profile" @click="logout" class="ml-2">
