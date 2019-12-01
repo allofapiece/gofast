@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import Point from './Point.vue'
+    import Point from './PointItem.vue'
 
     export default {
         components: {

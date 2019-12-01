@@ -6,6 +6,10 @@ export class PointService {
         this.api = new PointApi(store)
     }
 
+    get(id){
+        return this.api.get(id);
+    }
+
     getByUserId(id) {
         return this.api.getByUserId(id)
     }

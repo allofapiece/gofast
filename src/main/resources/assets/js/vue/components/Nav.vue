@@ -3,7 +3,7 @@
         <v-toolbar>
             <v-container>
                 <v-row align="center">
-                    <v-toolbar-title>Anabel</v-toolbar-title>
+                    <v-toolbar-title>Go Fast</v-toolbar-title>
                     <div class="flex-grow-1"></div>
 
                     <template v-if="this.profile">

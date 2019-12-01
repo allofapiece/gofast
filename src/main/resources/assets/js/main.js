@@ -16,7 +16,7 @@ new Vue({
     store,
     vuetify,
     render: a => a(App),
-    beforeMount() {
+    beforeCreate() {
         userService.sync()
     }
 }).$mount('#app');

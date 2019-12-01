@@ -20,10 +20,9 @@ export class UserService {
         return this.actionApi.takeAddress({'slug': slug})
     }
 
-    sync() {
-        this.api.current().then(
-            response => store.commit('profile/profile', response.status === 200 ? response.data : false)
-        )
+    async sync() {
+        const response = await this.api.current()
+        store.commit('profile/profile', response.status === 200 ? response.data : false)
 
         return true;
     }

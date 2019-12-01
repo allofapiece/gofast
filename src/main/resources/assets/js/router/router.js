@@ -11,6 +11,7 @@ import Settings from 'vue/components/profile/setting/Settings.vue'
 import Security from 'vue/components/profile/setting/security/Security.vue'
 
 import Points from 'vue/components/points/Points.vue'
+import Point from 'vue/components/points/Point.vue'
 
 import Home from "vue/pages/Home.vue";
 import SignIn from "vue/components/auth/SignIn.vue";
@@ -49,6 +50,10 @@ const routes = [
     {
         path: '/points',
         component: Points
+    },
+    {
+        path: '/points/:id',
+        component: Point
     },
     {path: '/:slug?', component: ProfileHome, children: [
             {

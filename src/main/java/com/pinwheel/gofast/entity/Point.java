@@ -6,9 +6,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Formula;
 import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 /**
  * @version 1.0.0
@@ -19,7 +22,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @JsonFilter("pointFilter")
-public class Point implements Identifiable<Long> {
+public class Point implements Identifiable<Long>, Serializable {
     public Point(String address, Company company) {
         this.address = address;
         this.company = company;
@@ -35,5 +38,6 @@ public class Point implements Identifiable<Long> {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id")
-    private Company company;
+    @JsonView(Views.WithDependencies.class)
+    private User company;
 }

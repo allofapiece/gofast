@@ -1,5 +1,6 @@
 package com.pinwheel.gofast.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,11 +25,12 @@ public class Company extends User {
     @JsonView(Views.WithGeneral.class)
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private Set<Point> points = new HashSet<>();
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    private Set<Route> routes = new HashSet<>();
+    /*@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private Set<Route> routes = new HashSet<>();*/
 
     @Override
     public String getFullName() {

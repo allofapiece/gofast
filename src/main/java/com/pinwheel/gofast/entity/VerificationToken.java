@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -19,7 +20,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity
-public class VerificationToken {
+public class VerificationToken implements Serializable {
     /**
      * Constructor for default token string.
      *

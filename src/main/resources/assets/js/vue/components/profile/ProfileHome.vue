@@ -13,7 +13,7 @@
                                     <v-list-item-title>Profile</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
-                            <v-list-item link to="/points">
+                            <v-list-item link to="/points" v-if="this.profile.isCompany">
                                 <v-list-item-icon>
                                     <v-icon>rounded_corner</v-icon>
                                 </v-list-item-icon>

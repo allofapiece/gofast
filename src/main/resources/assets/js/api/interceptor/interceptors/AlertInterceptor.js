@@ -2,6 +2,7 @@ import alertService from 'alert/alert-service'
 import Interceptor from './Interceptor'
 import validateHelper from 'validate/helper'
 import Alert from 'alert/alert'
+import mapper from "./oauth2/mapper";
 
 export default class AlertInterceptor extends Interceptor {
     onFulfilled(config, isRequest) {
@@ -22,6 +23,14 @@ export default class AlertInterceptor extends Interceptor {
                         type: 'error'
                     }))
                     .forEach(alertService.push, alertService)
+            }
+
+            if (error.response.status === 400 && error.response.data.error) {
+                if (!error.response.data.alerts) {
+                    error.response.data.alerts = []
+                }
+
+                error.response.data.alerts.push(mapper.map(error.response.data))
             }
 
             if (error.response.data.alerts) {

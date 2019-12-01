@@ -1,12 +1,11 @@
 package com.pinwheel.gofast.entity;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,8 +16,10 @@ import java.util.Set;
 @EqualsAndHashCode(of = {"id"})
 @ToString(of = {"id"})
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public class Route {
+@JsonFilter("routeFilter")
+public class Route implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(Views.WithId.class)
@@ -26,10 +27,12 @@ public class Route {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "from_id")
+    @JsonView(Views.WithGeneral.class)
     private Point from;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "to_id")
+    @JsonView(Views.WithGeneral.class)
     private Point to;
 
     @ManyToMany(
@@ -41,9 +44,11 @@ public class Route {
             joinColumns = { @JoinColumn(name = "route_id") },
             inverseJoinColumns = { @JoinColumn(name = "vehicle_id") }
     )
+    @JsonView(Views.WithGeneral.class)
     private Set<Vehicle> vehicles = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id")
-    private Company company;
+    @JsonView(Views.WithDependencies.class)
+    private User company;
 }
