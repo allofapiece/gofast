@@ -60,6 +60,10 @@
         },
         methods: {
             submit() {
+                const ids = this.points
+                    .filter(point => this.values.includes(point.address))
+                    .map(point => point.id)
+
 
             }
         },

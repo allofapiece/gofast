@@ -32,4 +32,20 @@ export default class RouteApi extends Api {
             }
         })
     }
+
+    post(from, to, company) {
+        return this.instance.post('', {
+            from: `/${from}`,
+            to: `/${to}`,
+            company: `/${company}`
+        })
+    }
+
+    delete(id) {
+        return this.instance.delete(id)
+    }
+
+    deleteAll(ids) {
+        ids.forEach(this.delete)
+    }
 }

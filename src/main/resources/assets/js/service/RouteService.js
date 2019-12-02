@@ -17,6 +17,14 @@ export class RouteService {
     getByUserId(id) {
         return this.api.getByUserId(id)
     }
+
+    create(from, to) {
+        return this.api.post(from, to, store.getters['profile/profile'].id)
+    }
+
+    deleteAll(ids) {
+        return this.api.deleteAll(ids)
+    }
 }
 
 export default new RouteService();
