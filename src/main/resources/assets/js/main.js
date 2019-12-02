@@ -10,6 +10,7 @@ import store from 'store/store'
 import 'validate/vee-validate'
 
 import userService from './service/UserService'
+import vehicleService from './service/VehicleService'
 
 new Vue({
     router,
@@ -18,5 +19,6 @@ new Vue({
     render: a => a(App),
     beforeCreate() {
         userService.sync()
+        vehicleService.sync()
     }
 }).$mount('#app');

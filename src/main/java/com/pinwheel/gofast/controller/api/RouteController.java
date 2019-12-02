@@ -56,4 +56,23 @@ public class RouteController {
 
         return ResponseEntity.ok(wrapper);
     }
+
+    @GetMapping("search/userId")
+    @JsonView(Views.WithGeneral.class)
+    public ResponseEntity<MappingJacksonValue> userId(@RequestParam Long id, HttpServletRequest request) {
+        List<Route> routes = routeService.findByUserId(id);
+
+        Resources<Route> resources = new Resources<>(routes);
+
+        resources.add(new Link(request.getRequestURL().toString()).withSelfRel());
+
+        MappingJacksonValue wrapper = new MappingJacksonValue(resources);
+
+        wrapper.setFilters(new SimpleFilterProvider()
+                .addFilter("routeFilter",
+                        SimpleBeanPropertyFilter.filterOutAllExcept("id", "to", "from", "vehicles"))
+        .addFilter("pointFilter", SimpleBeanPropertyFilter.filterOutAllExcept("id", "address")));
+
+        return ResponseEntity.ok(wrapper);
+    }
 }

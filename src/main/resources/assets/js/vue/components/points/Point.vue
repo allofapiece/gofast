@@ -10,7 +10,7 @@
         </v-card>
         <h1>Related Points</h1>
         <v-divider class="mb-2"></v-divider>
-        <RoutesList :routes="routes"></RoutesList>
+        <RoutesList :routes="thisRoutes"></RoutesList>
     </v-container>
 </template>
 
@@ -26,24 +26,25 @@
         data() {
             return {
                 point: {},
-                routes: []
             }
         },
         computed: {
-            ...mapState('point', ['points'])
+            ...mapState('point', ['points']),
+            ...mapState('route', ['routes']),
+            thisRoutes() {
+                return routeService.getRoutesByPointId(this.$route.params.id)
+            }
         },
         mounted() {
             pointService.get(this.$route.params.id).then((result) => {
                 this.point = result.data
-            })
-            routeService.getByPointId(this.$route.params.id).then((result) => {
-                this.routes = result.data.content
             })
         },
         beforeMount() {
             this.$store.subscribe((mutation) => {
                 if (mutation.type === 'profile/profile') {
                     pointService.sync()
+                    routeService.sync()
                 }
             })
         }

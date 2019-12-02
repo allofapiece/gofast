@@ -42,10 +42,10 @@ export default class RouteApi extends Api {
     }
 
     delete(id) {
-        return this.instance.delete(id)
+        return this.instance.delete('' + id)
     }
 
     deleteAll(ids) {
-        ids.forEach(this.delete)
+        ids.forEach(this.delete, this)
     }
 }

@@ -17,4 +17,9 @@ public class SimpleRouteService implements RouteService {
     public List<Route> findByPointIdAndUserId(Long id, Long userId) {
         return routeRepository.findByFromIdOrToIdAndCompanyId(id, userId);
     }
+
+    @Override
+    public List<Route> findByUserId(Long userId) {
+        return routeRepository.findByCompanyId(userId);
+    }
 }

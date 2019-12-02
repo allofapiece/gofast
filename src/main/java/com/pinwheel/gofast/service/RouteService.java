@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface RouteService {
     List<Route> findByPointIdAndUserId(Long id, Long userId);
+    List<Route> findByUserId(Long userId);
 }
