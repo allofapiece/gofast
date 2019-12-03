@@ -3,7 +3,9 @@ import Cookies from 'js-cookie'
 export default {
     namespaced: true,
     state: {
-        points: []
+        points: [],
+        from: null,
+        to: null
     },
     getters: {
         points(state) {
@@ -19,6 +21,12 @@ export default {
         },
         reset(state) {
             state.points = [];
+        },
+        setFrom(state, from) {
+            state.from = from
+        },
+        setTo(state, from) {
+            state.from = from
         }
     },
     actions: {}

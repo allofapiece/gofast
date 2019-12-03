@@ -8,10 +8,12 @@ import com.pinwheel.gofast.entity.Route;
 import com.pinwheel.gofast.entity.User;
 import com.pinwheel.gofast.entity.Views;
 import com.pinwheel.gofast.entity.dto.PointDto;
+import com.pinwheel.gofast.entity.dto.SuggestDto;
 import com.pinwheel.gofast.repository.api.RouteRepository;
 import com.pinwheel.gofast.service.PointService;
 import com.pinwheel.gofast.service.RouteService;
 import lombok.RequiredArgsConstructor;
+import org.jgrapht.graph.DefaultEdge;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.data.rest.webmvc.support.RepositoryEntityLinks;
 import org.springframework.hateoas.Link;
@@ -63,6 +65,25 @@ public class RouteController {
         List<Route> routes = routeService.findByUserId(id);
 
         Resources<Route> resources = new Resources<>(routes);
+
+        resources.add(new Link(request.getRequestURL().toString()).withSelfRel());
+
+        MappingJacksonValue wrapper = new MappingJacksonValue(resources);
+
+        wrapper.setFilters(new SimpleFilterProvider()
+                .addFilter("routeFilter",
+                        SimpleBeanPropertyFilter.filterOutAllExcept("id", "to", "from", "vehicles"))
+        .addFilter("pointFilter", SimpleBeanPropertyFilter.filterOutAllExcept("id", "address")));
+
+        return ResponseEntity.ok(wrapper);
+    }
+
+    @GetMapping("search/suggest")
+    @JsonView(Views.WithGeneral.class)
+    public ResponseEntity<MappingJacksonValue> suggest(@RequestParam Long from, @RequestParam Long to, HttpServletRequest request) {
+        var routes = routeService.suggest(from, to);
+
+        Resources<List<SuggestDto>> resources = new Resources<>(routes);
 
         resources.add(new Link(request.getRequestURL().toString()).withSelfRel());
 

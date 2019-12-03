@@ -12,6 +12,7 @@
                     <v-row>
                         <v-col cols="12">
                             <v-autocomplete
+                                    autocomplete="off"
                                     label="Points"
                                 v-model="values"
                                 :items="items"
@@ -95,27 +96,6 @@
             }
         },
         mounted() {
-            /*let $this = this
-
-            this.$store.subscribe((mutation) => {
-                if (mutation.type === 'profile/profile') {
-                    routeService.sync().then(result => {
-                        $this.routes = routeService.getRoutesByPointId(this.$route.params.id)
-                        this.values = $this.routes.map(route => route.to.id === parseInt($this.$route.params.id)
-                            ? route.from.address
-                            : route.to.address
-                        )
-                    })
-                }
-            })*/
-
-            /*const routes = routeService.getByPointId(this.$route.params.id).then((result) => {
-                this.routes = result.data.content
-                this.values = result.data.content.map(point => point.to.id === parseInt($this.$route.params.id)
-                    ? point.from.address
-                    : point.to.address
-                )
-            })*/
         },
     }
 </script>

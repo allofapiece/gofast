@@ -25,6 +25,15 @@ export default class PointApi extends Api {
         })
     }
 
+    getAllLike(search, from) {
+        return this.instance.get('search/addressLike', {
+            params: {
+                search: search,
+                from: from ? from.id : 0
+            }
+        })
+    }
+
     add(data) {
         return this.instance.post('/', data)
     }

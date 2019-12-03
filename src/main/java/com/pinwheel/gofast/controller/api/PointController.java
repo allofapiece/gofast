@@ -12,6 +12,7 @@ import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.data.rest.webmvc.support.RepositoryEntityLinks;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.Resources;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,24 @@ public class PointController {
         resource.add(links.linkToSingleResource(resource.getContent()).withRel("point"));
 
         MappingJacksonValue wrapper = new MappingJacksonValue(resource);
+
+        wrapper.setFilters(new SimpleFilterProvider()
+                .addFilter("pointFilter",
+                        SimpleBeanPropertyFilter.filterOutAllExcept("id", "address")));
+
+        return ResponseEntity.ok(wrapper);
+    }
+
+    @GetMapping("/search/addressLike")
+    @JsonView(Views.WithGeneral.class)
+    public ResponseEntity<MappingJacksonValue> search(@RequestParam("search") String search,
+                                                      @RequestParam("from") Long from,
+                                                      HttpServletRequest request) {
+        Resources<Point> resources = new Resources<>(pointService.search(search, from));
+
+        resources.add(new Link(request.getRequestURL().toString()).withSelfRel());
+
+        MappingJacksonValue wrapper = new MappingJacksonValue(resources);
 
         wrapper.setFilters(new SimpleFilterProvider()
                 .addFilter("pointFilter",

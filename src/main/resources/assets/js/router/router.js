@@ -17,6 +17,7 @@ import Home from "vue/pages/Home.vue";
 import SignIn from "vue/components/auth/SignIn.vue";
 import SignUp from "vue/components/auth/SignUp.vue";
 import Feed from "vue/components/feed/Feed.vue";
+import Search from "../vue/components/search/Search.vue";
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,7 @@ const routes = [
     {path: '/signin', component: SignIn},
     {path: '/signup', component: SignUp},
     {path: '/feed', component: Feed},
+    {path: '/search', component: Search},
     {
         path: '/user/settings', component: Settings,
         children: [

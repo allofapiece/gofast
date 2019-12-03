@@ -11,4 +11,6 @@ public interface PointService {
     Point create(PointDto pointDto);
 
     List<Point> getByUserId(Long id);
+
+    List<Point> search(String search, Long from);
 }

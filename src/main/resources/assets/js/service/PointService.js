@@ -21,6 +21,10 @@ export class PointService {
         })
     }
 
+    search(search, from) {
+        return this.api.getAllLike(search, from)
+    }
+
     sync() {
         this.getByUserId().then(result => {
             store.commit('point/points', result.data._embedded.points)

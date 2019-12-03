@@ -13,4 +13,6 @@ import java.util.List;
 public interface PointRepository extends JpaRepository<Point, Long> {
     @RestResource(path = "userId", rel = "userId")
     List<Point> findByCompanyId(@Param("id") Long id);
+
+    List<Point> findByAddressContainsIgnoreCase(String search);
 }

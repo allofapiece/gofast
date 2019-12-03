@@ -3,6 +3,7 @@ package com.pinwheel.gofast.entity;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -37,7 +38,7 @@ public class Route implements Serializable {
 
     @ManyToMany(
             fetch = FetchType.LAZY,
-            cascade = {CascadeType.ALL}
+            cascade = {CascadeType.DETACH}
     )
     @JoinTable(
             name = "route_vehicle",
@@ -45,6 +46,7 @@ public class Route implements Serializable {
             inverseJoinColumns = { @JoinColumn(name = "vehicle_id") }
     )
     @JsonView(Views.WithGeneral.class)
+    @RestResource(path = "vehicles", rel="vehicles")
     private Set<Vehicle> vehicles = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)

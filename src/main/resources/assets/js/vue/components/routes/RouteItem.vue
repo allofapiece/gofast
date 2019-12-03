@@ -22,10 +22,15 @@
     import {mapState} from "vuex";
     import vehicle from "../../../store/modules/vehicle";
 
+    import routeService from 'service/RouteService'
+    import alertService from 'alert/alert-service'
+
     export default {
         data() {
             return {
-                vehicle: ''
+                vehicle: this.route.vehicles.length
+                    ? this.route.vehicles[0].name
+                    : ''
             }
         },
         props: {
@@ -44,7 +49,11 @@
         },
         methods: {
             onChange() {
-                console.log(this.vehicle)
+                routeService.update(this.route.id, {
+                    vehicles: this.vehicles
+                        .filter(vehicle => vehicle.name === this.vehicle)
+                        .map(vehicle => `/${vehicle.id}`)
+                }).then(() => {alertService.push({message: 'Changes accepted.'})})
             }
         }
     }

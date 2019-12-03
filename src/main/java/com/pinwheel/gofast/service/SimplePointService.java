@@ -35,4 +35,9 @@ public class SimplePointService implements PointService {
     public List<Point> getByUserId(Long id) {
         return pointRepository.findByCompanyId(id);
     }
+
+    @Override
+    public List<Point> search(String search, Long from) {
+        return pointRepository.findByAddressContainsIgnoreCase(search);
+    }
 }

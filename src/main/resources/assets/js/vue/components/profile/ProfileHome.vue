@@ -21,6 +21,14 @@
                                     <v-list-item-title>Points</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
+                            <v-list-item link to="/search" v-if="!this.profile.isCompany">
+                                <v-list-item-icon>
+                                    <v-icon>search</v-icon>
+                                </v-list-item-icon>
+                                <v-list-item-content>
+                                    <v-list-item-title>Search</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
                             <v-list-item link to="/user/settings/general">
                                 <v-list-item-icon>
                                     <v-icon>settings_input_component</v-icon>

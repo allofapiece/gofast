@@ -48,6 +48,14 @@ export class RouteService {
         return empty(ids) ? Promise.resolve(false) : this.api.deleteAll(ids)
     }
 
+    update(id, data) {
+        return this.api.patch(id, data)
+    }
+
+    suggest(from, to) {
+        return this.api.suggest(from, to)
+    }
+
     sync() {
         return this.getByUserId().then(result => {
             store.commit('route/routes', result.data.content)

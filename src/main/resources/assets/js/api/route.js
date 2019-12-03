@@ -41,11 +41,24 @@ export default class RouteApi extends Api {
         })
     }
 
+    patch(id, data) {
+        return this.instance.patch('' + id, data)
+    }
+
     delete(id) {
         return this.instance.delete('' + id)
     }
 
     deleteAll(ids) {
         ids.forEach(this.delete, this)
+    }
+
+    suggest(from, to) {
+        return this.instance.get('/search/suggest', {
+            params: {
+                from: from,
+                to: to
+            }
+        })
     }
 }

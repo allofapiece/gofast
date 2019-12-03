@@ -1,10 +1,12 @@
 package com.pinwheel.gofast.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -26,6 +28,8 @@ public class Vehicle {
 
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "vehicles")
+    @RestResource(path = "routes", rel="routes")
     private Set<Route> routes = new HashSet<>();
 }
