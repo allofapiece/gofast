@@ -59,9 +59,8 @@
                 pointService.search(val, this.selected)
                     .then(res => {
                         this.entries = res.data.content
-                    }).catch(err => {
-                    console.log(err)
-                }).finally(() => (this.isLoading = false))
+                    }).catch(console.log)
+                    .finally(() => (this.isLoading = false))
             },
         }
     }

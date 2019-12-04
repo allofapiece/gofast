@@ -53,11 +53,12 @@ export default class RouteApi extends Api {
         ids.forEach(this.delete, this)
     }
 
-    suggest(from, to) {
+    suggest(from, to, vehicle) {
         return this.instance.get('/search/suggest', {
             params: {
                 from: from,
-                to: to
+                to: to,
+                vehicle: vehicle
             }
         })
     }

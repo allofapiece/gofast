@@ -52,8 +52,8 @@ export class RouteService {
         return this.api.patch(id, data)
     }
 
-    suggest(from, to) {
-        return this.api.suggest(from, to)
+    suggest(from, to, vehicle) {
+        return this.api.suggest(from, to, vehicle)
     }
 
     sync() {

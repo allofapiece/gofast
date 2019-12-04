@@ -39,11 +39,14 @@ public class SimpleRouteService implements RouteService {
     }
 
     @Override
-    public List<List<SuggestDto>> suggest(Long fromId, Long toId) {
+    public List<List<SuggestDto>> suggest(Long fromId, Long toId, Long vehicle) {
         Point fromPoint = pointRepository.findById(fromId).get();
         Point toPoint = pointRepository.findById(toId).get();
 
-        List<Route> routes = routeRepository.findByCompanyId(fromPoint.getCompany().getId());
+        List<Route> routes = routeRepository.findByCompanyIdAndVehicles_IdIn(
+                fromPoint.getCompany().getId(),
+                List.of(vehicle)
+        );
         List<Point> points = pointRepository.findByCompanyId(fromPoint.getCompany().getId());
 
         DefaultDirectedGraph<Point, SuggestEdge> graph

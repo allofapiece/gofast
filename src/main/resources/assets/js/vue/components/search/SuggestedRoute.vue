@@ -10,16 +10,19 @@
                     <router-link :to="`/points/${point.to.id}`">{{point.to.address}}</router-link>
                 </div>
             </div>
+            <SuggestApply></SuggestApply>
         </v-card-text>
     </v-card>
 </template>
 
 <script>
+    import SuggestApply from "./SuggestApply.vue";
     export default {
         props: {
             suggest: Array,
         },
         components: {
+            SuggestApply
         },
         data: () => ({
         }),

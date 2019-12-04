@@ -2,6 +2,19 @@
     <div>
         <v-container>
             <v-row>
+                <v-col cols="12" sm="6">
+                    <v-select
+                            @change="changeVehicle"
+                            :items="vehicleItems"
+                            v-model="vehicle"
+                            label="Vehicle"
+                            solo
+                            dense
+                            class="vehicle-select"
+                    ></v-select>
+                </v-col>
+            </v-row>
+            <v-row>
                 <SearchPoint @change="changeFrom" label="Start Point"></SearchPoint>
                 <SearchPoint @change="changeTo" label="Finish Point" :model="from"></SearchPoint>
             </v-row>
@@ -17,6 +30,7 @@
     import SearchPoint from "./SearchPoint.vue";
     import SuggestedRoutes from "./SuggestedRoutes.vue";
     import routeService from "service/RouteService"
+    import {mapState} from "vuex";
 
     export default {
         components: {
@@ -26,29 +40,49 @@
         data: () => ({
             to: null,
             from: null,
-            suggests: []
+            suggests: [],
+            vehicle: ''
         }),
         computed: {
+            ...mapState('vehicle', ['vehicles']),
+            vehicleItems: {
+                get() {
+                    return this.vehicles.map(vehicle => vehicle.name)
+                },
+                set(value) {
+                    this.vehicle = value
+                }
+            }
         },
         methods: {
             changeFrom(val) {
-                this.to = val
+                this.from = val
 
-                if (this.to && this.from) {
+                if (this.to && this.from && this.vehicle) {
                     this.suggest()
                 }
             },
             changeTo(val) {
-                this.from = val
+                this.to = val
 
-                if (this.to && this.from) {
+                if (this.to && this.from && this.vehicle) {
+                    this.suggest()
+                }
+            },
+            changeVehicle(val) {
+                if (this.to && this.from && this.vehicle) {
                     this.suggest()
                 }
             },
             suggest() {
+                const vehicleId = this.vehicles
+                    .filter(vehicle => vehicle.name === this.vehicle)
+                    .map(vehicle => vehicle.id)
+
                 return routeService.suggest(
                     this.from.id,
-                    this.to.id
+                    this.to.id,
+                    vehicleId.length ? vehicleId[0] : 0
                 ).then((res) => {
                     this.suggests = res.data.content
                 })

@@ -80,8 +80,9 @@ public class RouteController {
 
     @GetMapping("search/suggest")
     @JsonView(Views.WithGeneral.class)
-    public ResponseEntity<MappingJacksonValue> suggest(@RequestParam Long from, @RequestParam Long to, HttpServletRequest request) {
-        var routes = routeService.suggest(from, to);
+    public ResponseEntity<MappingJacksonValue> suggest(@RequestParam Long from, @RequestParam Long to,
+                                                       @RequestParam Long vehicle, HttpServletRequest request) {
+        var routes = routeService.suggest(from, to, vehicle);
 
         Resources<List<SuggestDto>> resources = new Resources<>(routes);
 

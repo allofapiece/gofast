@@ -12,6 +12,8 @@ import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "routes", path = "routes", excerptProjection = RouteProjection.class)
 public interface RouteRepository extends JpaRepository<Route, Long> {
+    List<Route> findByCompanyIdAndVehicles_IdIn(@Param("id") Long id, List<Long> vehicleIds);
+
     @RestResource(path = "userId", rel = "userId")
     List<Route> findByCompanyId(@Param("id") Long id);
 
