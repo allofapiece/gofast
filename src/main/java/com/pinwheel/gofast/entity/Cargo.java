@@ -1,17 +1,17 @@
 package com.pinwheel.gofast.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.data.rest.core.annotation.RestResource;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.math.BigDecimal;
 
 /**
  * @version 1.0.0
@@ -21,7 +21,7 @@ import java.util.Set;
 @ToString(of = {"id", "name"})
 @NoArgsConstructor
 @Entity
-public class Vehicle implements Serializable {
+public class Cargo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(Views.WithId.class)
@@ -29,8 +29,5 @@ public class Vehicle implements Serializable {
 
     private String name;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "vehicles")
-    @RestResource(path = "routes", rel="routes")
-    private Set<Route> routes = new HashSet<>();
+    private BigDecimal price;
 }

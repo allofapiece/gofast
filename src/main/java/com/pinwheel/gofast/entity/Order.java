@@ -1,17 +1,13 @@
 package com.pinwheel.gofast.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @version 1.0.0
@@ -21,16 +17,23 @@ import java.util.Set;
 @ToString(of = {"id", "name"})
 @NoArgsConstructor
 @Entity
-public class Vehicle implements Serializable {
+public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(Views.WithId.class)
     private Long id;
 
-    private String name;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cargo_id")
+    private Cargo cargo;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "vehicles")
-    @RestResource(path = "routes", rel="routes")
-    private Set<Route> routes = new HashSet<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "from_id")
+    private Point from;
+
+    private float weight;
 }

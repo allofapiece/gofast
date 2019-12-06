@@ -10,7 +10,7 @@
                     <router-link :to="`/points/${point.to.id}`">{{point.to.address}}</router-link>
                 </div>
             </div>
-            <SuggestApply></SuggestApply>
+            <SuggestApply :from="suggest.from"></SuggestApply>
         </v-card-text>
     </v-card>
 </template>

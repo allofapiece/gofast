@@ -41,7 +41,7 @@
             to: null,
             from: null,
             suggests: [],
-            vehicle: ''
+            vehicle: 'car'
         }),
         computed: {
             ...mapState('vehicle', ['vehicles']),

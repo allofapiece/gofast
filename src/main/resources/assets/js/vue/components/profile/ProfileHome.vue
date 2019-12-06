@@ -13,15 +13,25 @@
                                     <v-list-item-title>Profile</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
-                            <v-list-item link to="/points" v-if="this.profile.isCompany">
-                                <v-list-item-icon>
-                                    <v-icon>rounded_corner</v-icon>
-                                </v-list-item-icon>
-                                <v-list-item-content>
-                                    <v-list-item-title>Points</v-list-item-title>
-                                </v-list-item-content>
-                            </v-list-item>
-                            <v-list-item link to="/search" v-if="!this.profile.isCompany">
+                            <template v-if="this.profile.isCompany">
+                                <v-list-item link to="/points">
+                                    <v-list-item-icon>
+                                        <v-icon>rounded_corner</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Points</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item link to="/orders">
+                                    <v-list-item-icon>
+                                        <v-icon>rounded_corner</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Orders</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </template>
+                            <v-list-item link to="/search">
                                 <v-list-item-icon>
                                     <v-icon>search</v-icon>
                                 </v-list-item-icon>
