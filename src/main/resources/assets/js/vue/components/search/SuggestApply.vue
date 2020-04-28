@@ -49,7 +49,8 @@
     export default {
         components: {},
         props: {
-            from: null
+            from: Object,
+            vehicle: Number
         },
         data() {
             return {
@@ -68,13 +69,16 @@
                     weight: this.weight,
                     cargo: `/${this.cargo}`,
                     user: `/${this.profile.id}`,
-                    from: `/${from.id}`
+                    from: `/${this.from.id}`,
+                    vehicle: `/${this.vehicle}`
                 }).then(() => {
                     alertService.push('Order sent.')
+                    this.dialog = false
                 })
             }
         },
         mounted() {
+
         },
     }
 </script>

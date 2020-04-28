@@ -12,5 +12,7 @@ public interface OrderProjection {
     Long getId();
     Cargo getCargo();
     User getUser();
+    Point getFrom();
+    Vehicle getVehicle();
     float getWeight();
 }

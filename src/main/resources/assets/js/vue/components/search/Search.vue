@@ -5,7 +5,9 @@
                 <v-col cols="12" sm="6">
                     <v-select
                             @change="changeVehicle"
-                            :items="vehicleItems"
+                            :items="vehicles"
+                            item-text="name"
+                            item-value="id"
                             v-model="vehicle"
                             label="Vehicle"
                             solo
@@ -20,7 +22,7 @@
             </v-row>
             <v-divider></v-divider>
             <v-row>
-                <SuggestedRoutes :suggests="suggests"></SuggestedRoutes>
+                <SuggestedRoutes :vehicle="vehicle" :suggests="suggests"></SuggestedRoutes>
             </v-row>
         </v-container>
     </div>
@@ -41,18 +43,10 @@
             to: null,
             from: null,
             suggests: [],
-            vehicle: 'car'
+            vehicle: 1
         }),
         computed: {
             ...mapState('vehicle', ['vehicles']),
-            vehicleItems: {
-                get() {
-                    return this.vehicles.map(vehicle => vehicle.name)
-                },
-                set(value) {
-                    this.vehicle = value
-                }
-            }
         },
         methods: {
             changeFrom(val) {
@@ -75,14 +69,10 @@
                 }
             },
             suggest() {
-                const vehicleId = this.vehicles
-                    .filter(vehicle => vehicle.name === this.vehicle)
-                    .map(vehicle => vehicle.id)
-
                 return routeService.suggest(
                     this.from.id,
                     this.to.id,
-                    vehicleId.length ? vehicleId[0] : 0
+                    this.vehicle
                 ).then((res) => {
                     this.suggests = res.data.content
                 })

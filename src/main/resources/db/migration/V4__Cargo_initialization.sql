@@ -16,6 +16,8 @@ create table `order`
     `id`         bigint not null auto_increment,
     `cargo_id`       bigint,
     `user_id`       bigint,
+    `from_id`       bigint,
+    `vehicle_id`       bigint,
     `weight`      float,
     primary key (`id`)
 ) engine = MyISAM;
@@ -25,3 +27,7 @@ alter table `order`
     add constraint `osiepgsegh` foreign key (`cargo_id`) references `cargo` (`id`);
 alter table `order`
     add constraint `osiepgsegsegh` foreign key (`user_id`) references `user` (`id`);
+alter table `order`
+    add constraint `osiepgsegsesgh` foreign key (`from_id`) references `point` (`id`);
+alter table `order`
+    add constraint `osiepgsegsessagh` foreign key (`vehicle_id`) references `vehicle` (`id`);

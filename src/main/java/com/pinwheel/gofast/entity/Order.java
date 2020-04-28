@@ -1,5 +1,6 @@
 package com.pinwheel.gofast.entity;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,9 +15,10 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(of = {"id"})
-@ToString(of = {"id", "name"})
+@ToString(of = {"id"})
 @NoArgsConstructor
 @Entity
+@JsonFilter("orderFilter")
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +36,10 @@ public class Order implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "from_id")
     private Point from;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
 
     private float weight;
 }

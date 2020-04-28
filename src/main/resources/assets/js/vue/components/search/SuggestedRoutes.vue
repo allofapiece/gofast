@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <SuggestedRoute v-for="(suggest, i) in suggests" :key="i" :suggest="suggest"></SuggestedRoute>
+        <SuggestedRoute v-for="(suggest, i) in suggests" :key="i" :suggest="suggest" :vehicle="vehicle"></SuggestedRoute>
     </v-container>
 </template>
 
@@ -10,6 +10,7 @@
     export default {
         props: {
             suggests: Array,
+            vehicle: Number,
         },
         components: {
             SuggestedRoute

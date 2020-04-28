@@ -10,7 +10,29 @@ VALUES (2, 'USER'),
        (2, 'ADMIN'),
        (1, 'USER');
 
-insert into `vehicle` (`name`)
-values ('car'),
-       ('plane'),
-       ('train');
+insert into `vehicle` (`name`, `capacity`)
+values ('car', 400),
+       ('plane', 5000),
+       ('train', 3000);
+
+
+insert into `point` (`id`, `company_id`, `address`) values
+(1, 2, '230 Douglas Ave'),
+(2, 2, '60 Masons Landing'),
+(3, 2, '2665 State Hwy 501'),
+(4, 2, 'E Plum St'),
+(5, 2, 'Boardwalk Cir');
+
+insert into `route` (`company_id`, `from_id`, `to_id`) values
+(2, 1, 2),
+(2, 2, 3),
+(2, 2, 4),
+(2, 4, 5),
+(2, 2, 5);
+
+insert into `route_vehicle` (`route_id`, `vehicle_id`) values
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1);

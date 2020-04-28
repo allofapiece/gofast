@@ -10,7 +10,7 @@
                     <router-link :to="`/points/${point.to.id}`">{{point.to.address}}</router-link>
                 </div>
             </div>
-            <SuggestApply :from="suggest.from"></SuggestApply>
+            <SuggestApply :from="suggest[0].from" :vehicle="vehicle"></SuggestApply>
         </v-card-text>
     </v-card>
 </template>
@@ -20,6 +20,7 @@
     export default {
         props: {
             suggest: Array,
+            vehicle: Number,
         },
         components: {
             SuggestApply

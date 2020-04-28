@@ -18,7 +18,7 @@ import java.util.Set;
  */
 @Data
 @EqualsAndHashCode(of = {"id"})
-@ToString(of = {"id", "name"})
+@ToString(of = {"id", "name", "capacity"})
 @NoArgsConstructor
 @Entity
 public class Vehicle implements Serializable {
@@ -28,6 +28,8 @@ public class Vehicle implements Serializable {
     private Long id;
 
     private String name;
+
+    private int capacity;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "vehicles")

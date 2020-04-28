@@ -51,6 +51,7 @@ create table `vehicle`
 (
     `id`   bigint not null auto_increment,
     `name` varchar(255),
+    `capacity` int(11),
     primary key (`id`)
 ) engine = MyISAM;
 create table `verification_token`
